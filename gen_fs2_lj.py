@@ -58,6 +58,43 @@ def generate_html_page(wav_filepath_dict, ctrl_values, speaker):
         file.write('<hr />')
         file.write('<br />')
 
+def generate_html_page_variation(wav_filepath_dict, ctrl_values, speaker):
+    control_values = []
+
+    with open(outputfile, "a") as file:
+        file.write("<h4>"+speaker + "Variations </h4>" + '<br />')
+        file.write('<table>')
+    
+        # TABLE HEADING
+        file.write('<tr>')
+        file.write('<th>Feature</th>')
+        for ind, value in enumerate(variation_ids):
+            file.write('<th> sent'+str(ind)+'</th>')
+        file.write('</tr>')
+
+        # WRITE ROWS
+        for key in wav_filepath_dict:
+            print('\n\n')
+            print(wav_filepath_dict[key])
+            print('\n\n')
+            file.write('<tr>')
+            file.write('<td>'+ key +'</td>')
+
+            for fileid in wav_filepath_dict[key]:
+                print('aaa', wav_filepath_dict[key][fileid])
+                file_wavpath = wav_filepath_dict[key][fileid]
+                file.write('<td> <audio controls=""><source src='+ file_wavpath + ' type="audio/wav"></audio> </td>')
+                #Debug
+                #file.write('<td>'+ file_wavpath +'</td>')
+
+            file.write('</tr>')
+
+
+        file.write('</table>')
+        file.write('<br />')
+        file.write('<hr />')
+        file.write('<br />')
+
 
 wav_directory = "testsamples_lj"
 
@@ -85,3 +122,35 @@ if __name__ == "__main__":
     for sentence_id in sentence_id_list:
         wav_filepath_dict = arrange_table_cells(wav_directory, ctrl_values, sentence_id)
         generate_html_page(wav_filepath_dict, ctrl_values, speaker)
+
+
+    #Variation LJ
+    sentence_id_list =   ["LJ010-0252.wav",  "LJ012-0250.wav",  "LJ018-0310.wav", "LJ021-0154.wav", "LJ032-0123.wav", "LJ046-0126.wav"]
+    variation_ids = ['variationA', 'variationB', 'variationC', 'variationD', 'variationE']
+    wav_directory = "lj_variation_result"
+    speaker = "LJ Speech"
+    table_cell_information = {}
+    table_cell_information = {var_id: {} for var_id in variation_ids}
+    for variation_id in variation_ids:
+        for fn in os.listdir(os.path.join(wav_directory,variation_id)):
+            fn_audio_path = os.path.join(wav_directory, variation_id, fn)
+            table_cell_information[variation_id][fn] = fn_audio_path
+    print(table_cell_information)
+    generate_html_page_variation(table_cell_information, variation_ids,  speaker)
+
+
+    
+    #Variation Ryan
+    sentence_id_list =   ["sent01.wav", "sent03.wav","sent04.wav", "sent08.wav", "sent09.wav", "sent10.wav"]
+    variation_ids = ['variationA', 'variationB', 'variationC', 'variationD', 'variationE']  
+    wav_directory = "ryan_variation_result"
+    speaker = "Ryan"
+    table_cell_information = {}
+    table_cell_information = {var_id: {} for var_id in variation_ids}
+    for variation_id in variation_ids:
+        for fn in os.listdir(os.path.join(wav_directory,variation_id)):
+            fn_audio_path = os.path.join(wav_directory, variation_id, fn)
+            table_cell_information[variation_id][fn] = fn_audio_path
+    print(table_cell_information)
+    generate_html_page_variation(table_cell_information, variation_ids,  speaker)
+    
