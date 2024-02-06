@@ -25,10 +25,11 @@ def arrange_table_cells(wav_directory, ctrl_values, sentence_id):
     return wav_files_dict
 
 
-def generate_html_page(wav_filepath_dict, ctrl_values):
+def generate_html_page(wav_filepath_dict, ctrl_values, speaker):
     control_values = []
 
     with open(outputfile, "a") as file:
+        file.write("<h4>"+speaker + "</h4>" + '<br />')
         file.write('<table>')
     
         # TABLE HEADING
@@ -71,6 +72,16 @@ if __name__ == "__main__":
         file.write("<body>\n")
         file.write("<h2>Model: FastSpeech2 Control</h2>" + '<br />')
     sentence_id_list =   ["LJ010-0252.wav","LJ021-0154.wav", "LJ046-0126.wav"]
+    speaker = "LJ Speech"
     for sentence_id in sentence_id_list:
         wav_filepath_dict = arrange_table_cells(wav_directory, ctrl_values, sentence_id)
-        generate_html_page(wav_filepath_dict, ctrl_values)
+        generate_html_page(wav_filepath_dict, ctrl_values, speaker)
+
+    # RYAN RYAN RYAN
+    sentence_id_list =   ["sent01.wav","sent04.wav", "sent08.wav"]
+    features = ['pa', 'pr', 'pd', 'se', 'st', 'f0std', 'all']
+    wav_directory = "testsamples_ryan"
+    speaker = "Ryan"
+    for sentence_id in sentence_id_list:
+        wav_filepath_dict = arrange_table_cells(wav_directory, ctrl_values, sentence_id)
+        generate_html_page(wav_filepath_dict, ctrl_values, speaker)
