@@ -11,3 +11,8 @@ Data from Dall, Rasmus. (2017). Thesis Material - Rasmus Dall, [dataset]. Univer
 Synthethic Speech Stimuli created by training a Controllable FastSpeech2 model with LJSpeech and RyanDB
 1. LJvoice Stimuli   [here](https://aadigwe.github.io/CtrlSynSamples/Task2)
 2. Ryanvoice Stimuli  [here](https://aadigwe.github.io/CtrlSynSamples/Task2_Ryan)
+
+
+## Task 3: Pilot Listening Test (ParlerTTS Samples)
+1. Listening Samples [here](https://aadigwe.github.io/CtrlSynSamples/Task3)
+2. Pilot Samples [here]
